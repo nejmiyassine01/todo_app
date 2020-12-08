@@ -1,4 +1,9 @@
-.app {
-  width: 900px;
+a {
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+    display: flex;
 }
 
