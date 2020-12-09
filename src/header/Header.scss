@@ -6,18 +6,17 @@
         object-fit: cover;
         
         & img {
-            height: 400px;
+            height: 300px;
             width: 100%;
         }
     }
 
     &_head {
         width: 600px;
-        margin: auto;
         display: flex;
         justify-content: space-between;
         position: absolute;
-        top: 40%;
+        top: 30%;
         left: 400px;
         color: #fff;
     }
@@ -29,6 +28,7 @@
 
     & svg {
         font-size: 30px;
+        cursor: pointer;
     }
     
 }
