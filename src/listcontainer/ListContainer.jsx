@@ -8,30 +8,22 @@ function ListContainer(props) {
 
     const [remover, setRemover] = useState(false);
     const removeItem = () => setRemover(!remover);
-
-    const [todos, setTodos] = useState([]);
-
-    const addTodo = todo => {
-        if(!todo.text || /^\s*$/.test(todo.text)) {
-            return;
-        }
-
-        const newTodos = [todo, ...todos];
-        
-        setTodos(newTodos);
-        console.log(todo, ...todos);
-    }
     
     const [input, setInput] = useState('');
     const inputFields = (e) => {
         setInput(e.target.value);
     };
 
+    const [todos, setTodos] = useState([])
+    const addTodos = (input) => {
+        setTodos([...todos, { input, id: Math.floor(Math.random() * 10000)}])
+        console.log(todos.id);
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log('Submitted Form');
-        
-        // onsubmit({
+        console.log('Success Submitted')
+        // props.onSubmit({
         //     id: Math.floor(Math.random() * 10000),
         //     text: input
         // })
@@ -39,7 +31,7 @@ function ListContainer(props) {
     
     return (
         <>
-            <div className="listcontainer" onSubmit={addTodo}>
+            <div className="listcontainer">
                 <form className="listcontainer_form" autoComplete="off" onSubmit={handleSubmit}>
                     <input type="checkbox" />
                     <input 
@@ -48,8 +40,9 @@ function ListContainer(props) {
                         onChange={inputFields} 
                         name="name"
                         value={input}
+                        required
                     />
-                    <button onClick={handleSubmit}>Submit</button>
+                    <button type="submit" onClick={addTodos}>Submit</button>
                 </form>
             </div>
             
@@ -58,12 +51,12 @@ function ListContainer(props) {
                     <div className={`listcontainer_items ${remover ? "remove" : null}`} key={index}>
                         <div className="listcontainer_content" key={todo.id}>
                             <input type="checkbox" />
-                            <p>{todo.text}</p>
+                            <p>{input}</p>
                         </div>
                         <Ai.AiOutlineClose onClick={removeItem}/>
                     </div>
                 ))}
-
+                
                 <div className="listcontainer_list">
                     <p>0 items left</p>
                     <ul>
