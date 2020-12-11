@@ -1,7 +1,7 @@
 import React from 'react'
 import './Header.scss'
-import deskDark from '../static/bg-desktop-dark.jpg'
-import mobLight from '../static/bg-mobile-light.jpg'
+import deskDark from '../../static/bg-desktop-dark.jpg'
+import mobLight from '../../static/bg-mobile-light.jpg'
 import * as Fi from 'react-icons/fi'
 import * as Bs from 'react-icons/bs'
 
