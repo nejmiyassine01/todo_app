@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-function TodoForm(props, { onChange }) {
+function TodoForm(props) {
     const [input, setInput] = useState('');
     const inputFields = (e) => {
         setInput(e.target.value);
@@ -20,7 +20,7 @@ function TodoForm(props, { onChange }) {
     
     return (
         <form className="listcontainer_form" autoComplete="off" onSubmit={handleSubmit}>
-            <input type="checkbox" onChange={onChange} />
+            {/* <input type="checkbox" /> */}
             <input 
                 className="listcontainer_input" 
                 type="text" placeholder="Enter new Item..." 
