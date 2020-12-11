@@ -19,7 +19,7 @@ function TodoForm(props) {
     
     return (
         <form className="listcontainer_form" autoComplete="off" onSubmit={handleSubmit}>
-            <input type="checkbox" defaultChecked={true} />
+            <input type="checkbox" defaultChecked={false} />
             <input 
                 className="listcontainer_input" 
                 type="text" placeholder="Enter new Item..." 
