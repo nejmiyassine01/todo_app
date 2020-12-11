@@ -1,4 +1,3 @@
-import './App.css';
 import Header from './header/Header';
 import ListContainer from './listcontainer/ListContainer';
 

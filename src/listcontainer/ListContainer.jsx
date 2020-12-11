@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import * as Ai from 'react-icons/ai'
+import TodoForm from '../TodoForm/TodoForm';
 import './ListContainer.scss'
 
 function ListContainer(props) {
@@ -8,52 +9,44 @@ function ListContainer(props) {
 
     const [remover, setRemover] = useState(false);
     const removeItem = () => setRemover(!remover);
-    
-    const [input, setInput] = useState('');
-    const inputFields = (e) => {
-        setInput(e.target.value);
-    };
 
     const [todos, setTodos] = useState([])
     const addTodos = (input) => {
-        setTodos([...todos, { input, id: Math.floor(Math.random() * 10000)}])
-        console.log(todos.id);
+        if(!input.text || /^\s*$/.test(input.text)) {
+            return;
+        }
+
+        const newTodos = [input, ...todos];
+        setTodos(newTodos);
+        console.log(newTodos);
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('Success Submitted')
-        // props.onSubmit({
-        //     id: Math.floor(Math.random() * 10000),
-        //     text: input
-        // })
+    const removeTodo = id => {
+        const removeArr = [...todos].filter(todo => todo.id !== id)
+
+        setTodos(removeArr);
+    }
+
+    const removeAllTodos = id => {
+        const removeAll = [...todos]
+
+        setTodos(removeAll);
     }
     
     return (
         <>
             <div className="listcontainer">
-                <form className="listcontainer_form" autoComplete="off" onSubmit={handleSubmit}>
-                    <input type="checkbox" />
-                    <input 
-                        className="listcontainer_input" 
-                        type="text" placeholder="Enter new Item..." 
-                        onChange={inputFields} 
-                        name="name"
-                        value={input}
-                        required
-                    />
-                    <button type="submit" onClick={addTodos}>Submit</button>
-                </form>
+                <TodoForm onSubmit={addTodos}/>
             </div>
             
             <div className="listcontainer_todo">
                 {todos.map((todo, index) => (
-                    <div className={`listcontainer_items ${remover ? "remove" : null}`} key={index}>
+                    <div className={`listcontainer_items ${remover ? "remove" : null}`} key={index} >
                         <div className="listcontainer_content" key={todo.id}>
                             <input type="checkbox" />
-                            <p>{input}</p>
+                            <p>{todo.text}</p>
                         </div>
-                        <Ai.AiOutlineClose onClick={removeItem}/>
+                        <Ai.AiOutlineClose onClick={() => removeTodo(todo.id)}/>
                     </div>
                 ))}
                 
@@ -64,7 +57,7 @@ function ListContainer(props) {
                         <li><a onClick={addClass} className={ toggleClass ? "active" : null } href="#active">Active</a></li>
                         <li><a onClick={addClass} className={ toggleClass ? "active" : null } href="#completed">Completed</a></li>
                     </ul>
-                    <a href="#clear" className={ toggleClass ? "active" : null } onClick={removeItem}>Clear Completed</a>
+                    <a href="#clear" className={ toggleClass ? "active" : null } onClick={() => removeAllTodos()}>Clear Completed</a>
                 </div>
             </div>
         </>
